@@ -35,11 +35,12 @@ public class Scrabble {
 
     public int getScore() {
         int score = 0;
+        int counter;
+        char last;
 
-        for (int i = 0; i < aWord.length(); i++) {
-            int counter = 1;
-            char last = aWord.charAt(i);
-
+        for (int i = 1; i < aWord.length(); i++) {
+            last = aWord.charAt(i - 1);
+            counter = 1;
             while (last == aWord.charAt(i)) {
                 counter++;
                 i++;
@@ -47,8 +48,8 @@ public class Scrabble {
             }
 
             for (Set<Character> characters : scores.keySet()) {
-                if (characters.contains(aWord.charAt(i))) {
-                    score += (scores.get(characters) * counter);
+                if (characters.contains(last)) {
+                    score = score + (scores.get(characters) * counter);
                     break;
                 }
             }
